@@ -17,19 +17,40 @@
 # - network_id: The ID of the VPC
 # - subnet_ids: List of subnet IDs
 
-resource "google_compute_network" "vpc_network" {
-  # Creates a VPC network with a specified name
-  name                    = var.network_name
-  auto_create_subnetworks = false  # Custom subnets will be defined manually
+# main.tf - Network Module
+#
+# Variables declared directly in this file
+
+variable "network_name" {
+  description = "The name of the VPC network"
+  type        = string
 }
 
-resource "google_compute_subnetwork" "subnetwork" {
-  # Creates subnets based on the provided subnet list
-  count = length(var.subnets)  # Dynamically creates the number of subnets
+variable "subnets" {
+  description = "A list of subnets, each with a name and CIDR block"
+  type = list(object({
+    name = string
+    cidr = string
+  }))
+}
 
-  # Subnet properties
-  name          = var.subnets[count.index]["name"]
-  network       = google_compute_network.vpc_network.id
+variable "region" {
+  description = "The region to deploy resources"
+  type        = string
+}
+
+# Resource to create a VPC network
+resource "google_compute_network" "vpc_network" {
+  name                    = var.network_name
+  auto_create_subnetworks = false
+}
+
+# Resource to create subnets
+resource "google_compute_subnetwork" "subnet" {
+  count = length(var.subnets)
+  
+  name       = var.subnets[count.index]["name"]
+  network    = google_compute_network.vpc_network.id
   ip_cidr_range = var.subnets[count.index]["cidr"]
-  region        = var.region  # Region where the subnets will be deployed
+  region     = var.region
 }
