@@ -15,12 +15,6 @@
 # variables.tf file or in the relevant module configurations.
 #
 
-# Provider configuration (Google Cloud)
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
 # Network Module
 module "network" {
   source       = "./modules/network"  # Path to the network module
