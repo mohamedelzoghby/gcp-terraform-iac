@@ -1,9 +1,6 @@
 # gcp-terraform-iac
 This repository contains a Terraform-based project for deploying infrastructure on Google Cloud Platform (GCP). It includes modular code for VPCs, subnets, compute resources, and storage. Supports multiple environments (dev/prod) and follows best practices for scalable Infrastructure as Code (IaC).
 
-Overview
-This repository contains a Terraform-based project to deploy infrastructure on Google Cloud Platform (GCP). It includes reusable modules for key resources like VPC networks, subnets, compute instances, and storage, supporting multiple environments (e.g., dev and prod). The project adheres to best practices for Infrastructure as Code (IaC).
-
 Features
 Modular Architecture: Reusable Terraform modules for VPC, compute, and storage.
 Multi-Environment Setup: Configurations for both development and production environments.
