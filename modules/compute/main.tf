@@ -22,31 +22,62 @@
 # - instance_ids: The IDs of the created instances
 # - instance_ips: The internal IPs of the created instances
 
-resource "google_compute_instance" "vm_instance" {
-  # Creates multiple instances based on the count
+# main.tf - Compute Module
+#
+# Variables declared directly in this file
+
+variable "instance_name" {
+  description = "Base name for the VM instance"
+  type        = string
+}
+
+variable "instance_count" {
+  description = "Number of instances to create"
+  type        = number
+  default     = 1
+}
+
+variable "machine_type" {
+  description = "Machine type for the VM"
+  type        = string
+}
+
+variable "image" {
+  description = "Disk image for the VM"
+  type        = string
+}
+
+variable "zone" {
+  description = "The zone to deploy the VM"
+  type        = string
+}
+
+variable "network_id" {
+  description = "The ID of the VPC network"
+  type        = string
+}
+
+variable "subnetwork_id" {
+  description = "The ID of the subnetwork"
+  type        = string
+}
+
+# Resource to create VM instances
+resource "google_compute_instance" "vm" {
   count        = var.instance_count
 
-  # Instance properties
-  name         = "${var.instance_name}-${count.index}"  # Unique instance name
+  name         = "${var.instance_name}-${count.index}"
   machine_type = var.machine_type
   zone         = var.zone
 
-  # Boot disk configuration
   boot_disk {
     initialize_params {
-      image = var.image  # The disk image to use (e.g., debian-cloud/debian-10)
+      image = var.image
     }
   }
 
-  # Network interface and subnetwork details
   network_interface {
     network    = var.network_id
     subnetwork = var.subnetwork_id
-  }
-
-  # Assigning a service account to the instance
-  service_account {
-    email  = var.service_account_email
-    scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 }
