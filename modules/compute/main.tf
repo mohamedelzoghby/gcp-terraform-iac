@@ -23,8 +23,6 @@
 # - instance_ips: The internal IPs of the created instances
 
 # main.tf - Compute Module
-#
-# Variables declared at the root level
 
 # Resource to create VM instances
 resource "google_compute_instance" "vm_instance" {
