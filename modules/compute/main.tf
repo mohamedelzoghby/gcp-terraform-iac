@@ -24,49 +24,7 @@
 
 # main.tf - Compute Module
 #
-# Variables declared directly in this file
-
-variable "instance_name" {
-  description = "Base name for the VM instance"
-  type        = string
-}
-
-variable "instance_count" {
-  description = "Number of instances to create"
-  type        = number
-  default     = 1
-}
-
-variable "machine_type" {
-  description = "Machine type for the VM"
-  type        = string
-}
-
-variable "image" {
-  description = "Disk image for the VM"
-  type        = string
-}
-
-variable "zone" {
-  description = "The zone to deploy the VM"
-  type        = string
-}
-
-variable "network_id" {
-  description = "The ID of the VPC network"
-  type        = string
-}
-
-variable "subnetwork_id" {
-  description = "The ID of the subnetwork"
-  type        = string
-}
-
-variable "service_account_email" {
-  description = "The service account email to associate with the VM instance"
-  type        = string
-}
-
+# Variables declared at the root level
 
 # Resource to create VM instances
 resource "google_compute_instance" "vm" {
