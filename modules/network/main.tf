@@ -19,25 +19,7 @@
 
 # main.tf - Network Module
 #
-# Variables declared directly in this file
-
-variable "network_name" {
-  description = "The name of the VPC network"
-  type        = string
-}
-
-variable "subnets" {
-  description = "A list of subnets, each with a name and CIDR block"
-  type = list(object({
-    name = string
-    cidr = string
-  }))
-}
-
-variable "region" {
-  description = "The region to deploy resources"
-  type        = string
-}
+# Variables declared at the root level
 
 # Resource to create a VPC network
 resource "google_compute_network" "vpc_network" {
