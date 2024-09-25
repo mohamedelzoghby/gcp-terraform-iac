@@ -13,6 +13,7 @@ output "network_id" {
 
 # Output the list of Subnet IDs
 output "subnet_ids" {
-  description = "The IDs of the created subnets"
+  description = "List of Subnet IDs"
   value       = google_compute_subnetwork.subnetwork[*].id
 }
+
