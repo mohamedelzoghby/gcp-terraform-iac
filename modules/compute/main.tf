@@ -27,9 +27,8 @@
 # Variables declared at the root level
 
 # Resource to create VM instances
-resource "google_compute_instance" "vm" {
+resource "google_compute_instance" "vm_instance" {
   count        = var.instance_count
-
   name         = "${var.instance_name}-${count.index}"
   machine_type = var.machine_type
   zone         = var.zone
@@ -44,4 +43,10 @@ resource "google_compute_instance" "vm" {
     network    = var.network_id
     subnetwork = var.subnetwork_id
   }
+
+  service_account {
+    email  = var.service_account_email
+    scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+  }
 }
+
