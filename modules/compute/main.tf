@@ -62,6 +62,12 @@ variable "subnetwork_id" {
   type        = string
 }
 
+variable "service_account_email" {
+  description = "The service account email to associate with the VM instance"
+  type        = string
+}
+
+
 # Resource to create VM instances
 resource "google_compute_instance" "vm" {
   count        = var.instance_count
