@@ -13,7 +13,7 @@ A Google Cloud account and project.
 A service account with proper permissions and a credentials file.
 Google Cloud SDK installed for managing your GCP environment.
 
-Project Structur
+Project Structure
 📦 gcp-terraform-iac
 ├── modules
 │   ├── network
