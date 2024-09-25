@@ -1,21 +1,29 @@
-# Create a Google Cloud Storage bucket with specified parameters
+# main.tf - Storage Module
+#
+# This Terraform configuration defines the infrastructure for creating a Google Cloud Storage bucket.
+# It includes parameters for the bucket name, location, and lifecycle rules, such as automatic 
+# object deletion after a retention period. The configuration allows for forced deletion of the 
+# bucket even if it contains objects. The module outputs the bucket’s name and URL.
+#
+# Resources:
+# - google_storage_bucket: Defines the storage bucket and lifecycle rules.
+#
+# Inputs:
+# - bucket_name, location, force_destroy, retention_period, project_id
+#
+# Outputs:
+# - bucket_name, bucket_url
+
 resource "google_storage_bucket" "storage_bucket" {
-  # The unique name of the storage bucket
-  name     = var.bucket_name
-  
-  # Location where the bucket will be created (e.g., "US", "EU")
-  location = var.location
-  
-  # Allows bucket deletion even if it contains objects
+  name          = var.bucket_name
+  location      = var.location
   force_destroy = var.force_destroy
 
-  # Set lifecycle rules to automatically delete objects after a certain age
   lifecycle_rule {
     action {
       type = "Delete"
     }
     condition {
-      # Retention period (in days) before deletion
       age        = var.retention_period
       with_state = "ANY"
     }
