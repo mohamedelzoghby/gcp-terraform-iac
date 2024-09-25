@@ -1,40 +1,36 @@
-# variables.tf - Centralized Variables
-
-# GCP Project ID
+# General variables
 variable "project_id" {
-  description = "The GCP project ID where resources will be created"
+  description = "The GCP project ID"
   type        = string
 }
 
-# Region for resource deployment
 variable "region" {
-  description = "The region where all resources will be deployed"
+  description = "The GCP region to deploy resources"
   type        = string
-  default     = "us-central1"
 }
 
-# Declare the variables for the network module
+# Network module variables
 variable "network_name" {
   description = "The name of the VPC network"
   type        = string
 }
 
 variable "subnets" {
-  description = "A list of subnets to create"
+  description = "List of subnets with CIDR blocks"
   type = list(object({
     name = string
     cidr = string
   }))
 }
 
-# Declare the variables for the compute module
+# Compute module variables
 variable "instance_name" {
-  description = "Base name for the VM instance"
+  description = "Base name for the VM instances"
   type        = string
 }
 
 variable "instance_count" {
-  description = "Number of VM instances"
+  description = "Number of VM instances to create"
   type        = number
 }
 
@@ -43,13 +39,13 @@ variable "machine_type" {
   type        = string
 }
 
-variable "image" {
-  description = "The disk image to use for the VM instance(s)"
+variable "zone" {
+  description = "The zone where the VM instance(s) will be deployed"
   type        = string
 }
 
-variable "zone" {
-  description = "The zone where the VM instance(s) will be deployed"
+variable "image" {
+  description = "The image to use for VM instances"
   type        = string
 }
 
@@ -58,3 +54,24 @@ variable "service_account_email" {
   type        = string
 }
 
+# Storage module variables
+variable "bucket_name" {
+  description = "The name of the storage bucket"
+  type        = string
+}
+
+variable "location" {
+  description = "The location of the storage bucket"
+  type        = string
+}
+
+variable "force_destroy" {
+  description = "Whether to force bucket deletion, even if it contains objects"
+  type        = bool
+  default     = false
+}
+
+variable "retention_period" {
+  description = "How long to retain objects in the bucket (in days)"
+  type        = number
+}
