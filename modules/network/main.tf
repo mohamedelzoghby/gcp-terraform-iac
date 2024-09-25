@@ -18,8 +18,7 @@
 # - subnet_ids: List of subnet IDs
 
 # main.tf - Network Module
-#
-# Variables declared at the root level
+
 
 # Resource to create a VPC network
 resource "google_compute_network" "vpc_network" {
