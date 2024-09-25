@@ -28,7 +28,7 @@ resource "google_compute_network" "vpc_network" {
 }
 
 # Resource to create subnets
-resource "google_compute_subnetwork" "subnet" {
+resource "google_compute_subnetwork" "subnetwork" {
   count = length(var.subnets)
   
   name       = var.subnets[count.index]["name"]
